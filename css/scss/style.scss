@@ -1,0 +1,632 @@
+@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/mixins";
+// Variables pre-define:
+$firm-blue: #BED1E1;
+$firm-beige: #E1CEBE;
+$firm-gray: #EBEDEE;
+$firm-white: #FFFFFF;
+$firm-text: #404040;
+$firm-dark-blue: #566E98;
+
+$firm-colors: (
+  "firm-blue": $firm-blue,
+  "firm-beige": $firm-beige,
+  "firm-gray": $firm-gray,
+  "firm-white": $firm-white,
+  "firm-text": $firm-text,
+  "firm-dark-blue": $firm-dark-blue,
+);
+
+$filter-firm-white: invert(100%) brightness(150%) contrast(100%);
+$filter-firm-beige: invert(90%) sepia(13%) saturate(338%) hue-rotate(342deg) brightness(92%) contrast(92%);
+$filter-firm-blue: invert(88%) sepia(19%) saturate(319%) hue-rotate(176deg) brightness(93%) contrast(89%);
+$filter-firm-gray: invert(99%) sepia(1%) saturate(748%) hue-rotate(170deg) brightness(95%) contrast(96%);
+$filter-firm-text: invert(23%) sepia(10%) saturate(0%) brightness(96%) contrast(200%);
+$filter-firm-dark-blue: invert(42%) sepia(15%) saturate(1195%) hue-rotate(180deg) brightness(96%) contrast(87%);
+
+// <grid>
+$spacer: 16px;
+$spacers: ("3_4": $spacer * 3/4, "9_4": $spacer * 9/4, "8_4": $spacer * 2);
+$sizes: (
+  "min-content": min-content,
+  "max-content": max-content
+);
+$grid-gutter-width: 25px;
+$grid-breakpoints: (
+  xs: 0,
+  xsm: 420px,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px
+);
+// </grid>
+$link-hover-decoration: none;
+$link-hover-color: $firm-dark-blue;
+
+// <themes>
+$input-focus-border-color: $firm-beige;
+$input-border-color: $firm-beige;
+$input-placeholder-color: $firm-beige;
+$input-btn-focus-width: .1rem;
+//$component-active-bg: $firm-beige;
+$input-btn-focus-color: rgba($firm-beige, .35);
+//$input-color: $firm-beige;
+$dropdown-link-hover-color: $firm-dark-blue;
+$dropdown-link-active-color: $firm-white;
+$dropdown-link-active-bg: $firm-white;
+$dropdown-link-hover-bg: $firm-white;
+// </themes>
+
+// <carousel>
+$carousel-control-opacity: 0;
+$carousel-control-hover-opacity: .6;
+$carousel-control-width: 70px;
+$carousel-control-icon-width: 70px;
+$carousel-control-color: $firm-white;
+$carousel-control-background-color: $firm-beige;
+$carousel-control-transition:        opacity .2s ease, background-color .2s ease;
+$carousel-control-next-icon-bg: url("../img/chevron-right.svg");
+$carousel-control-prev-icon-bg: url("../img/chevron-left.svg");
+
+$carousel-indicator-width: 34px;
+$carousel-indicator-height: 10px;
+$carousel-indicator-spacer: 10px;
+$carousel-indicator-active-bg: $firm-dark-blue;
+$carousel-indicator-active-active-bg: $firm-white;
+// </carousel>
+
+$enable-responsive-font-sizes: false;
+@import "../../node_modules/bootstrap/scss/variables";
+
+
+$theme-colors: map_merge(
+    $firm-colors,
+    $theme-colors
+);
+
+
+@import "../../node_modules/bootstrap/scss/carousel";
+
+
+// <carousel>
+
+.carousel-control-prev {
+  border-top-left-radius: .2rem;
+  border-bottom-left-radius: .2rem;
+}
+.carousel-control-next {
+  border-top-right-radius: .2rem;
+  border-bottom-right-radius: .2rem;
+}
+.carousel-control-prev,
+.carousel-control-next { // bug in bootstrap
+  @include hover-focus() {
+    background-color: $firm-beige;
+  }
+}
+.carousel-control-prev-icon {
+  background-color: $carousel-control-color;
+  mask: escape-svg($carousel-control-prev-icon-bg) top left / cover;
+  -webkit-mask: escape-svg($carousel-control-prev-icon-bg) top left / cover;
+  background-image: none;
+  opacity: 1;
+}
+.carousel-control-next-icon {
+  background-color: $carousel-control-color;
+  mask: escape-svg($carousel-control-next-icon-bg) top left / cover;
+  -webkit-mask: escape-svg($carousel-control-next-icon-bg) top left / cover;
+  background-image: none;
+  opacity: 1;
+}
+.carousel-indicators {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 15;
+  display: flex;
+  justify-content: center;
+  padding-left: 0; // override <ol> default
+  // Use the .carousel-control's width as margin so we don't overlay those
+  margin-right: $carousel-control-width;
+  margin-left: $carousel-control-width;
+  margin-bottom: 19px;
+  list-style: none;
+  li {
+    //box-sizing: content-box;
+    box-sizing: border-box;
+    border-radius: 6px;
+    flex: 0 1 auto;
+    width: $carousel-indicator-width;
+    height: $carousel-indicator-height;
+    margin-right: $carousel-indicator-spacer;
+    margin-left: $carousel-indicator-spacer;
+    text-indent: -999px;
+    cursor: pointer;
+    background-color: $carousel-indicator-active-bg;
+    background-clip: padding-box;
+    // Use transparent borders to increase the hit area by 10px on top and bottom.
+    //border-top: $carousel-indicator-hit-area-height solid transparent;
+    border-top: none;
+    //border-bottom: $carousel-indicator-hit-area-height solid transparent;
+    border-bottom: none;
+    opacity: 1.0;
+    @include transition($carousel-indicator-transition);
+  }
+  .active {
+    background-color: $carousel-indicator-active-active-bg;
+    opacity: 1;
+  }
+}
+// </carousel>
+
+
+@import "../../node_modules/bootstrap/scss/root";
+@import "../../node_modules/bootstrap/scss/reboot";
+@import "../../node_modules/bootstrap/scss/type";
+@import "../../node_modules/bootstrap/scss/images";
+@import "../../node_modules/bootstrap/scss/code";
+@import "../../node_modules/bootstrap/scss/grid";
+@import "../../node_modules/bootstrap/scss/forms";
+@import "../../node_modules/bootstrap/scss/buttons";
+
+a.active.focus,
+a.active:focus,
+a.focus,
+a:active.focus,
+a:active:focus,
+a:focus,
+button.active.focus,
+button.active:focus,
+button.focus,
+button:active.focus,
+button:active:focus,
+button:focus,
+.btn.active.focus,
+.btn.active:focus,
+.btn.focus,
+.btn:active.focus,
+.btn:active:focus,
+.btn:focus {
+  outline: 0 !important;
+  outline-color: transparent !important;
+  outline-style: none !important;
+  box-shadow: 0 0 0 0 rgba(0, 123, 255, 0) !important;
+}
+
+.btn-product {
+  @include button-variant($firm-blue, $firm-beige, $hover-background: darken($firm-beige, 0%), $hover-border: darken($firm-beige, 0%), $active-background: darken($firm-beige, 10%), $active-border: darken($firm-beige, 12.5%));
+}
+
+@import "../../node_modules/bootstrap/scss/transitions";
+
+*, *::after, *::before {
+  transition: all ease .2s 0s;
+  &:hover, &:active, &:focus {
+    transition: all ease .2s 0s;
+  }
+}
+//$enable-caret: false;
+$caret-width: .4em;
+@mixin caret-right() {
+  border: none;
+  background-color: $firm-text;
+  mask: url("../img/chevron-right.svg") top left / cover;
+  -webkit-mask: url("../img/chevron-right.svg") top left / cover;
+  width: 20px;
+  height: 20px;
+  transform: translate(100%, -50%);
+  right: 0;
+  margin: 0;
+  top: 50%;
+  position: absolute;
+}
+@import "../../node_modules/bootstrap/scss/dropdown";
+
+@each $breakpoint in map-keys($grid-breakpoints) {
+  @include media-breakpoint-up($breakpoint) {
+    $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+    .dropdown-menu#{$infix}-top {
+      top: 0 !important;
+      bottom: auto !important;
+    }
+    .dropdown-menu#{$infix}-bottom {
+      top: auto !important;
+      bottom: 0 !important;
+    }
+  }
+}
+
+@import "../../node_modules/bootstrap/scss/button-group";
+@import "../../node_modules/bootstrap/scss/input-group";
+@import "../../node_modules/bootstrap/scss/custom-forms";
+@import "../../node_modules/bootstrap/scss/card";
+@import "../../node_modules/bootstrap/scss/alert";
+@import "../../node_modules/bootstrap/scss/list-group";
+@import "../../node_modules/bootstrap/scss/utilities";
+
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
+// <fonts>
+
+$rfs-base-font-size: 10;
+$rfs-font-size-unit: px;
+$rfs-factor: 80;
+
+a, p, h1, h2, h3, h4, h5, h6, label, button, span, body {
+  font-family: Fira Sans, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  @include responsive-font-size(16px);
+  line-height: 21px;
+  /* or 131% */
+  //-moz-osx-font-smoothing: grayscale;
+  //-webkit-font-smoothing: antialiased;
+  color: $firm-text;
+}
+.main-font {
+  font-family: Fira Sans, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  @include responsive-font-size(16px, false);
+  line-height: 21px;
+  /* or 131% */
+  letter-spacing: 0.02em;
+  color: $firm-text;
+}
+.h1 {
+  font-family: Fira Sans, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  @include responsive-font-size(32px, false);
+  line-height: 38px;
+}
+.h2 {
+  font-family: Fira Sans, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  @include responsive-font-size(24px, false);
+  line-height: 29px;
+}
+.h3 {
+  font-family: Fira Sans, sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  @include responsive-font-size(18px, false);
+  line-height: 22px;
+}
+.h4 {
+  font-family: Fira Sans, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  @include responsive-font-size(16px, false);
+  line-height: 21px;
+  /* or 131% */
+}
+.h5 {
+  font-family: Fira Sans, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  @include responsive-font-size(14px, false);
+  line-height: 19px;
+  /* or 136% */
+}
+.h6 {
+  font-family: Fira Sans, sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  @include responsive-font-size(12px, false);
+  line-height: 14px;
+  /* identical to box height */
+}
+.additional-font {
+  font-family: Fira Sans, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  @include responsive-font-size(14px, false);
+  line-height: 17px;
+}
+.additional-font-2 {
+  font-family: Fira Sans, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  @include responsive-font-size(12px, false);
+  line-height: 14px;
+}
+.price-font {
+  font-family: Montserrat Alternates, sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  @include responsive-font-size(36px, false);
+  line-height: 44px;
+}
+// </fonts>
+.nav-top {
+  min-height: 40px;
+  &__link {
+    display: inline-block;
+    min-width: max-content;
+    padding: 0 5px;
+    a {
+      text-decoration: none;
+    }
+  }
+  &__left {
+    min-height: 40px;
+    flex: 0 1 330px;
+  }
+  &__right {
+    min-height: 40px;
+    flex: 0 1 310px
+  }
+}
+.brand-logo {
+  img {
+    width: 127px;
+    height: 101px;
+  }
+}
+.search-main {
+  padding-left: 42px !important;
+  min-height: 100%;
+  @include media-breakpoint-down(md) {
+    padding-left: 0 !important;
+  }
+  &__button {
+    top: 8px;
+    right: 8px;
+    width: 24px;
+    height: 24px;
+  }
+  &__input {
+    height: 40px;
+  }
+}
+.shopping-cart {
+  min-height: 78px;
+  &__counter {
+    //width: 43px;
+    //height: 25px;
+    padding: 3px 18px;
+  }
+  &__img {
+  }
+}
+.navigation-main {
+  margin-bottom: 28px;
+  @include media-breakpoint-down(xsm) {
+    margin-bottom: 16px;
+  }
+  &__wrapper {
+    padding: 10px 2px;
+    flex: 0 1 190px;
+    display: flex;
+    justify-content: center;
+    &:first-child {
+      padding-left: 0;
+    }
+    &:last-child {
+      padding-right: 0;
+    }
+  }
+  &__link {
+    height: 41px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+.sidebar {
+  &__item {
+    &__name{
+      white-space: normal;
+    }
+    &:hover &__name {
+      color: $firm-white;
+    }
+    &:hover::after, &:hover::before {
+      background-color: $firm-white;
+    }
+  }
+  &__submenu {
+    border: none;
+    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.25);
+    padding: 20px 25px 20px 25px;
+  }
+  &__subitem {
+    margin: 10px 0;
+    padding: 0;
+    height: 22px;
+  }
+}
+.news {
+  position: sticky;
+  top: 16px;
+  &__time-wrapper {
+    height: 19px;
+    width: 40px;
+  }
+  &__item:not(:last-child) {
+    margin-bottom: 18px;
+  }
+}
+.goods-card {
+  $root: &;
+  $rad: .25rem;
+  border-radius: 0;
+  border: none;
+  position: relative;
+  &__image {
+    border-radius: 0;
+  }
+  &__body {
+    padding: 19px 12px 0 12px;
+    border-radius: 0;
+  }
+  &__title {
+    margin-bottom: 45px;
+    height: 21px;
+    padding: 0 9px;
+  }
+  &__price-wrapper {
+    height: 63px;
+    border-top: 1px solid $firm-white;
+    border-bottom: 1px solid $firm-white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 18px;
+  }
+  &__price {
+    height: 21px;
+  }
+  &__form {
+    margin-bottom: 29px;
+  }
+  &__quantity-wrapper {
+    width: 95px;
+    height: 40px;
+    border: 1px 0 1px 0 solid $firm-white;
+    min-width: 80px;
+    overflow: hidden;
+  }
+  &__quantity {
+    outline: none;
+    max-width: 40px;
+    height: 15px;
+    text-align: center;
+    flex: 1 1 40px;
+    min-width: 0;
+  }
+  &__quantity-minus, &__quantity-plus {
+    height: 15px;
+    flex: 0 0 15px;
+    cursor: pointer;
+    background-color: $firm-dark-blue;
+    &:first-of-type {
+      mask: url("../img/minus-squared.svg") top left / cover;
+      -webkit-mask: url("../img/minus-squared.svg") top left / cover;
+    }
+    &:last-of-type {
+      mask: url("../img/plus-squared.svg") top left / cover;
+      -webkit-mask: url("../img/plus-squared.svg") top left / cover;
+    }
+  }
+  &__to-cart-button {
+    width: 119px;
+    height: 40px;
+    border: none;
+    box-shadow: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: .5 1 119px;
+    span {
+      white-space: nowrap;
+    }
+  }
+  &::after {
+    border-color: $firm-beige;
+    transition: all ease .2s 0s;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    content: "";
+    z-index: -10;
+    box-sizing: content-box;
+    top: -2px;
+    left: -2px;
+  }
+  &_active#{$root}::after {
+    filter: drop-shadow(0px 4px 20px rgba(0, 0, 0, 0.25)) blur(1px);
+    background: $firm-beige;
+    border: 2px solid $firm-beige;
+    border-radius: $rad;
+  }
+  &_active#{$root} {
+    border-radius: $rad;
+  }
+  &_active &__body {
+    border-bottom-left-radius: $rad;
+    border-bottom-right-radius: $rad;
+  }
+  &_active &__image {
+    border-top-left-radius: $rad;
+    border-top-right-radius: $rad;
+  }
+}
+.sales-item {
+  &__image-wrapper {
+    margin-bottom: 23px;
+    position: relative;
+  }
+  &__image {
+
+  }
+  &__time-wrapper {
+    height: 19px;
+    width: 40px;
+  }
+  &__badge {
+    position: absolute;
+    bottom: 0;
+    left: 10px;
+    transform: translateY(50%);
+  }
+  &__link {
+    height: 21px;
+    width: 100%;
+    color: $firm-dark-blue;
+    &:hover {
+      color: $firm-beige;
+    }
+  }
+}
+.footer-logo {
+  &__logo {
+    display: none;
+  }
+  &__background {
+    width: 127px;
+    height: 101px;
+    mask: url("../img/logo.svg") top left / cover;
+    -webkit-mask: url("../img/logo.svg") top left / cover;
+  }
+}
+.footer-location-mark {
+  &__image, &__wrapper {
+    width: 24px;
+    height: 24px;
+  }
+}
+.carousel-main {
+  &__slide {
+    position: relative;
+  }
+  &__slide-banner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background-color: rgba(red($firm-text), green($firm-text), blue($firm-text), .3);
+    padding: 34px 69px 43px 69px;
+  }
+  &__slide-header {
+    height: 37px;
+    width: 527px;
+    text-align: center;
+  }
+  &__indicators {
+    @include media-breakpoint-down(sm) {
+      display: none;
+    }
+  }
+}
+.page-content {
+  @include media-breakpoint-between(xsm, md) {
+    padding-left: 0;
+  }
+}
